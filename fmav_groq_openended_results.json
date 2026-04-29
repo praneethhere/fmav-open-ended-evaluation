@@ -1,0 +1,188 @@
+{
+  "backend": "openai/gpt-oss-120b",
+  "dataset": {
+    "n": 790,
+    "n_categories": 37,
+    "domains": {
+      "general": 532,
+      "financial": 53,
+      "scientific": 41,
+      "biomedical": 90,
+      "legal": 74
+    },
+    "seed": 42
+  },
+  "protocol": {
+    "setting": "open-ended generation + FMAV post-generation validation",
+    "temperature": 0,
+    "posthoc_threshold": 0.47,
+    "rag_threshold": 0.45,
+    "fmav_quorum": 3,
+    "routing_target": 0.908,
+    "scoring": "Generated answer classified as correct when max TF-IDF cosine similarity to fold correct-reference pool >= max similarity to fold incorrect-reference pool"
+  },
+  "metrics": {
+    "plain_openended_llm": {
+      "factual_accuracy_pct": 61.9,
+      "hallucination_delivery_pct": 38.1,
+      "false_suppression_pct": 0.0,
+      "mean_latency_ms": 2337.1,
+      "n_correct": 489,
+      "n_hall": 301,
+      "n_fs": 0,
+      "n": 790
+    },
+    "posthoc_filter": {
+      "factual_accuracy_pct": 63.2,
+      "hallucination_delivery_pct": 31.4,
+      "false_suppression_pct": 5.4,
+      "mean_latency_ms": 2337.1,
+      "n_correct": 499,
+      "n_hall": 248,
+      "n_fs": 43,
+      "n": 790
+    },
+    "rag_style_baseline": {
+      "factual_accuracy_pct": 68.5,
+      "hallucination_delivery_pct": 30.9,
+      "false_suppression_pct": 0.6,
+      "mean_latency_ms": 2337.1,
+      "n_correct": 541,
+      "n_hall": 244,
+      "n_fs": 5,
+      "n": 790
+    },
+    "fmav_openended_llm": {
+      "factual_accuracy_pct": 67.6,
+      "hallucination_delivery_pct": 24.6,
+      "false_suppression_pct": 7.8,
+      "mean_latency_ms": 2337.1,
+      "n_correct": 534,
+      "n_hall": 194,
+      "n_fs": 62,
+      "n": 790,
+      "domain_routing_pct": 91.1
+    }
+  },
+  "significance_hallucination_delivery_vs_fmav": {
+    "plain_openended_llm": {
+      "chi2": 105.009,
+      "p_value": 0.0,
+      "significant": true
+    },
+    "posthoc_filter": {
+      "chi2": 52.019,
+      "p_value": 0.0,
+      "significant": true
+    },
+    "rag_style_baseline": {
+      "chi2": 37.516,
+      "p_value": 0.0,
+      "significant": true
+    }
+  },
+  "significance_accuracy_vs_fmav": {
+    "plain_openended_llm": {
+      "chi2": 11.456,
+      "p_value": 0.0007,
+      "significant": true
+    },
+    "posthoc_filter": {
+      "chi2": 11.01,
+      "p_value": 0.0009,
+      "significant": true
+    },
+    "rag_style_baseline": {
+      "chi2": 0.298,
+      "p_value": 0.5854,
+      "significant": false
+    }
+  },
+  "domain_results": {
+    "biomedical": {
+      "plain_openended_llm": {
+        "n": 90,
+        "hallucination_delivery_pct": 34.4,
+        "factual_accuracy_pct": 65.6
+      },
+      "rag_style_baseline": {
+        "n": 90,
+        "hallucination_delivery_pct": 27.8,
+        "factual_accuracy_pct": 72.2
+      },
+      "fmav_openended_llm": {
+        "n": 90,
+        "hallucination_delivery_pct": 23.3,
+        "factual_accuracy_pct": 70.0
+      }
+    },
+    "legal": {
+      "plain_openended_llm": {
+        "n": 74,
+        "hallucination_delivery_pct": 43.2,
+        "factual_accuracy_pct": 56.8
+      },
+      "rag_style_baseline": {
+        "n": 74,
+        "hallucination_delivery_pct": 40.5,
+        "factual_accuracy_pct": 58.1
+      },
+      "fmav_openended_llm": {
+        "n": 74,
+        "hallucination_delivery_pct": 36.5,
+        "factual_accuracy_pct": 60.8
+      }
+    },
+    "financial": {
+      "plain_openended_llm": {
+        "n": 53,
+        "hallucination_delivery_pct": 39.6,
+        "factual_accuracy_pct": 60.4
+      },
+      "rag_style_baseline": {
+        "n": 53,
+        "hallucination_delivery_pct": 35.8,
+        "factual_accuracy_pct": 64.2
+      },
+      "fmav_openended_llm": {
+        "n": 53,
+        "hallucination_delivery_pct": 26.4,
+        "factual_accuracy_pct": 67.9
+      }
+    },
+    "scientific": {
+      "plain_openended_llm": {
+        "n": 41,
+        "hallucination_delivery_pct": 41.5,
+        "factual_accuracy_pct": 58.5
+      },
+      "rag_style_baseline": {
+        "n": 41,
+        "hallucination_delivery_pct": 34.1,
+        "factual_accuracy_pct": 65.9
+      },
+      "fmav_openended_llm": {
+        "n": 41,
+        "hallucination_delivery_pct": 24.4,
+        "factual_accuracy_pct": 68.3
+      }
+    },
+    "general": {
+      "plain_openended_llm": {
+        "n": 532,
+        "hallucination_delivery_pct": 37.6,
+        "factual_accuracy_pct": 62.4
+      },
+      "rag_style_baseline": {
+        "n": 532,
+        "hallucination_delivery_pct": 29.3,
+        "factual_accuracy_pct": 69.9
+      },
+      "fmav_openended_llm": {
+        "n": 532,
+        "hallucination_delivery_pct": 22.9,
+        "factual_accuracy_pct": 68.0
+      }
+    }
+  }
+}
